@@ -84,9 +84,8 @@ public class App {
 
     public static int randomNumberBetweenOneAndHundred() {
         Random random = new Random();
-        int numberToGuess = 1+ random.nextInt(99);
 
-        return numberToGuess;
+        return 1+ random.nextInt(99);
 
     }
 
@@ -105,15 +104,58 @@ public class App {
         return true;
     }
 
-    public static void camelCase(String satz){
-        char[] ar1 = satz.toCharArray();
+    public static String camelCase(String satz){
+        char[] car1 = satz.toCharArray();
+        StringBuilder satzneu = new StringBuilder();
+
+        for(int i = 0; i < car1.length; i++){
+            if(car1[i] >= 'A' && car1[i]  <= 'Z'){
+                car1[i] += 32;
+            }
+            if(car1[i] == ' '){
+                i++;
+                if(car1[i] >= 'a' && car1[i] <= 'z'){
+                    car1[i] -= 32;
+                }
+            }
+            if (i==0) {
+                if (car1[0] >= 'a' && car1[0] <= 'z') {
+                    car1[0] -= 32;
+                }
+            }
+        }
+
+        for(char c: car1){
+            if(c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z')
+                satzneu.append(c);
+        }
+        return satzneu.toString();
 
     }
 
 
-    public static int checkDigit(){
+    public static int checkDigit(int[] arr){
+        int Prüfziffer;
+        int Gewicht;
+        int Summe = 0;
+        int var;
 
-        return 5;
+        for (int i = 0; i < arr.length; i++) {
+            Gewicht = i+2;
+            Summe += Gewicht * arr[i];
+        }
+
+        var = Summe %11;
+        Prüfziffer = 11 - var;
+
+        if (Prüfziffer == 10){
+            Prüfziffer = 0;
+        }
+        if (Prüfziffer == 11){
+            Prüfziffer = 5;
+        }
+
+        return Prüfziffer;
     }
 
     public static void main(String[] args) {
